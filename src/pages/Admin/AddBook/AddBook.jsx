@@ -5,19 +5,22 @@ import InputProp from './InputProp';
 import SelectField from './SelectField';
 import Swal from 'sweetalert2';
 import { getUrl } from '../../../utils/getUrl';
+import imageCompression from 'browser-image-compression';
 
 const AddBook = () => {
 
   const {register, handleSubmit, watch, formState : {errors}, reset } = useForm();
   const [imageFile, setImageFile] = useState(null);
   const [createBook, {isLoading, isError}] = useCreateBookMutation();
-  const [imageFileName, setImageFileName] = useState('');
+  // const [imageFileName, setImageFileName] = useState('');
 
   const onSubmit= async(data)=>{
+    console.log(data)
     const newBookData = {
       ...data,
-      coverImage: imageFileName
+      coverImage:imageFile
     }
+    console.log(newBookData)
 
 
     try {
@@ -30,7 +33,7 @@ const AddBook = () => {
         timer: 1500
       });
       reset();
-      setImageFileName('');
+      // setImageFileName('');
       setImageFile(null);
     } catch (error) {
       console.error(error);
@@ -38,14 +41,39 @@ const AddBook = () => {
     }
   }
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async(e) => {
     const file = e.target.files[0];
-    if(file) {
-        setImageFile(file);
-        setImageFileName(file.name);
+
+    if (file) {
+      
+    }
+    if (file) {
+      console.log("File selected:", file.name);
+      console.log("Original size (MB):", file.size / 1024 / 1024);
+
+      if (file.size > 2 * 1024 * 1024) {
+        alert("File size must be less than 2 MB.");
+        return;
+      }
+
+      try {
+        const compressedFile = await imageCompression(file, {
+          maxSizeMB: 1, // Compress to under 1 MB
+          maxWidthOrHeight: 1920, // Resize if necessary
+        });
+        console.log("Compressed size (MB):", compressedFile.size / 1024 / 1024);
+        
+        const reader = new FileReader();
+        reader.onload = () => {
+          setImageFile(reader.result);
+        };
+        reader.readAsDataURL(compressedFile);
+      } catch (error) {
+        console.error("Image compression failed:", error);
+      }
     }
   }
-console.log(imageFile)
+// console.log(imageFile)
 
   return (
     <div className="max-w-lg mx-auto md:p-6 p-3 bg-white rounded-lg shadow-md my-10">
@@ -77,6 +105,7 @@ console.log(imageFile)
             { value: 'fiction', label: 'Fiction' },
             { value: 'horror', label: 'Horror' },
             { value: 'adventure', label: 'Adventure' },
+            { value: 'marketing', label: 'Marketing' },
              // Add more options as needed
           ]}
           register={register}
@@ -92,13 +121,6 @@ console.log(imageFile)
             <span className="ml-2 text-sm font-semibold text-gray-700">Trending</span>
           </label>
         </div>
-  
-        <InputProp 
-          label="Description"
-          name="description"
-          placeholder="Enter book description"
-          register={register}
-        />
 
         <InputProp 
           label={"Old Price"}
@@ -129,7 +151,7 @@ console.log(imageFile)
             className="mb-2 w-full"
           />
 
-          {imageFileName && <p className="text-sm text-gray-500">Selected: {imageFileName}</p>}
+          {/* {imageFileName && <p className="text-sm text-gray-500">Selected: {imageFileName}</p>} */}
       
         </div>
 

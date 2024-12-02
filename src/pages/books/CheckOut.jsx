@@ -169,7 +169,7 @@ const CheckOut = () => {
                                     <div className="inline-flex items-center">
                                         <input 
                                         type="checkbox" name="billing_same" id="billing_same" className="form-checkbox" onChange={(e)=>setIsChecked(e.target.checked)} />
-                                        <label htmlFor="billing_same" className="ml-2 ">I am aggree to the <Link className='underline underline-offset-2 text-blue-600'>Terms & Conditions</Link> and <Link className='underline underline-offset-2 text-blue-600'>Shoping Policy.</Link></label>
+                                        <label htmlFor="billing_same" className="ml-2 ">I aggree to the <Link className='underline underline-offset-2 text-blue-600'>Terms & Conditions</Link> and <Link className='underline underline-offset-2 text-blue-600'>Shoping Policy.</Link></label>
                                     </div>
                                 </div>
 

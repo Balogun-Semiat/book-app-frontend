@@ -34,7 +34,7 @@ const SingleBook = () => {
           <div className="">
           <div className="">
               <img
-                src={`${getUrl(book?.coverImage)}`}
+                src={book?.coverImage}
                 alt=""
                 className="mb-8"
               />

@@ -34,7 +34,7 @@ const booksApi = createApi({
                 url: '/create-book',
                 method: 'POST',
                 body: newBook
-            }),
+        }),
             invalidatesTags: ['Books']
         }),
         updateBook: builder.mutation({

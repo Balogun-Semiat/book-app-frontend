@@ -16,7 +16,7 @@ const TopSeller = () => {
     // const [books, setBooks] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('Choose a genre');
 
-    const category = ["Choose a genre", "Fiction", "Business", "Horror", "Adventure"]
+    const category = ["Choose a genre", "Fiction", "Business", "Horror", "Adventure", "Marketing"]
 
     // useEffect(()=>{
     //     fetch("books.json")

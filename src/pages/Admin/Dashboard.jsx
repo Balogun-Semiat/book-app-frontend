@@ -13,16 +13,20 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
 
+  // const endpoint = 'http://localhost:5000/api/admin'
+
   useEffect(() => {
       const fetchData = async()=>{
           try {
-              const response = await axios.get(`${getBaseUrl}/api/admin`, {
+            console.log(getBaseUrl)
+              const response = await axios.get( `${getBaseUrl()}/api/admin` , {
                   headers: {
                       'Authorization': `Bearer ${localStorage.getItem('token')}`,
                       'Content-Type': 'application/json',
                   },
               })
               setData(response.data);
+              console.log(response.data)
               setLoading(false);
           } catch (error) {
               console.error(error)
