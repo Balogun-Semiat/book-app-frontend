@@ -25,10 +25,12 @@ const booksApi = createApi({
             query: () => '/',
             providesTags: ['Books']
         }),
+        
         fetchSingleBook: builder.query({ 
             query: (id) => `/${id}`,
             providesTags: ( result, error, id ) => [{type: 'Books', id}]
         }),
+
         createBook: builder.mutation({
             query: (newBook) => ({ 
                 url: '/create-book',
@@ -37,6 +39,7 @@ const booksApi = createApi({
         }),
             invalidatesTags: ['Books']
         }),
+
         updateBook: builder.mutation({
             query: ({ id, ...rest }) => ({
                 url: `/edit/${id}`,
