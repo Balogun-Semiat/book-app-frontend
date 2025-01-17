@@ -12,7 +12,7 @@ const Banner = () => {
     <div className='w-1/2 md:w-full'>
         <h1 className='text-2xl md:text-5xl font-medium mb-7'>New Releases This Week</h1>
         <p className='mb-10'>It's time to update your reading list with some of the latest and greatest releases in the literary world. From heart-pumping thrillers to captivating memoirs, this week's new releases offer something for everyone</p>
-        <button className='bg-primary'>Subscribe</button>
+        <button className='bg-primary p-1 sm:px-6 px-2'>Subscribe</button>
     </div>
    </div>
   )
